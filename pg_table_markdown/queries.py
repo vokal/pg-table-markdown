@@ -9,9 +9,9 @@ def build_schema_query(table_schema):
                     character_maximum_length
         FROM 		information_schema.columns
         WHERE 		table_schema = '{0}'
+        ORDER BY    table_name
     )
     SELECT      JSON_AGG(table_schema_info.*)
-    FROM        table_schema_info
-    ORDER BY    table_name;
+    FROM        table_schema_info;
     """.format(table_schema)
     return schema_query
