@@ -12,3 +12,10 @@ compose:
         environment:
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=postgres
+publish:
+    pypi:
+        repository: https://pypi.python.org/pypi
+        username: $$pypiUser
+        password: $$pypiPassword
+        distributions:
+            - sdist
