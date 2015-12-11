@@ -4,8 +4,8 @@ import unittest
 import psycopg2
 
 
-DATABASE_HOST = os.getenv('DB_PORT_5432_TCP_ADDR')
-DATABASE_PORT = os.getenv('DB_PORT_5432_TCP_PORT')
+DATABASE_HOST = os.getenv('DB_PORT_5432_TCP_ADDR', '127.0.0.1')
+DATABASE_PORT = os.getenv('DB_PORT_5432_TCP_PORT', '5432')
 DATABASE_USER = 'postgres'
 DATABASE_PASSWORD = 'postgres'
 DATABASE_NAME = 'postgres'
