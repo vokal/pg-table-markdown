@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='pg-table-markdown',
-    version='1.0.0',
+    version='1.0.1',
     author='Vokal',
     author_email='pypi@vokal.io',
     description='A command line tool that generates markdown documentation for Postgres tables in a given schema',
