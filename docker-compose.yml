@@ -1,0 +1,9 @@
+db:
+    image: postgres:9.4
+cli:
+    build: .
+    volumes:
+        - .:/src
+        - ./tests.py:/test/tests.py
+    links:
+        - db

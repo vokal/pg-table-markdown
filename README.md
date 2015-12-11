@@ -17,3 +17,8 @@ Options:
   --output_file TEXT   Path for generated markdown file
   --help               Show this message and exit.
 ```
+
+## Run tests with Docker Compose
+```
+docker-compose run cli nosetests -v
+```
