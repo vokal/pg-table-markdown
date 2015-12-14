@@ -32,10 +32,10 @@ def cli(database_url, table_schema, output_file):
 
     parsed = parse_schema_data(schema_data=result[0])
     with open(output_file, 'w') as f:
-        for table_name, columns in parsed.iteritems():
+        for table_name in sorted(parsed.keys()):
             f.write(SECTION_HEADING.format(table_name))
             f.write(TABLE_HEADER)
             f.write(TABLE_DIVIDER)
-            for c in columns:
-                f.write(TABLE_ROW.format(**c))
+            for column in parsed[table_name]:
+                f.write(TABLE_ROW.format(**column))
             f.write('\n')

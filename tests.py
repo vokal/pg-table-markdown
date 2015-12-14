@@ -38,6 +38,13 @@ class CliTestCase(unittest.TestCase):
     def build_table(self):
         db = database_connection()
         create_table_query = """
+        DROP TABLE IF EXISTS my_whatever;
+        CREATE TABLE my_whatever
+        (
+            id          SERIAL PRIMARY KEY,
+            stuff       TEXT NOT NULL
+        );
+
         DROP TABLE IF EXISTS my_users;
         CREATE TABLE my_users
         (
@@ -67,3 +74,11 @@ class CliTestCase(unittest.TestCase):
         self.assertEqual('email | text | None | NO \n', result[5])
         self.assertEqual('password | text | None | NO \n', result[6])
         self.assertEqual('\n', result[7])
+
+        self.assertEqual('### my_whatever \n', result[8])
+        self.assertEqual('\n', result[9])
+        self.assertEqual('Column | Type | Default | Nullable \n', result[10])
+        self.assertEqual('--- | --- | --- | --- \n', result[11])
+        self.assertEqual("id | integer | nextval('my_whatever_id_seq'::regclass) | NO \n", result[12])
+        self.assertEqual('stuff | text | None | NO \n', result[13])
+        self.assertEqual('\n', result[14])
