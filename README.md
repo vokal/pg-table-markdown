@@ -18,6 +18,13 @@ Options:
   --help               Show this message and exit.
 ```
 
+**Note:**
+For those unfamiliar with Postgres database connection URLs, they use the following format:
+```
+postgres://username:password@host:port/dbname
+```
+
+
 ## Run tests with Docker Compose
 ```
 docker-compose run cli nosetests -v
