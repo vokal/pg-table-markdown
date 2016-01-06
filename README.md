@@ -1,4 +1,4 @@
-A command line tool that generates markdown documentation for Postgres tables in a given schema
+A command line tool that generates Markdown documentation for Postgres tables in a given schema.
 
 ## Installation
 ```
@@ -26,6 +26,21 @@ For those unfamiliar with Postgres database connection URLs, they use the follow
 ```
 postgres://username:password@host:port/dbname
 ```
+
+
+## Sample Output
+
+The generated Markdown details the column name, type, and default value for each table defined in your schema. It also displays nicely in GitHub (see more [here](./SAMPLE_TABLES.md)).
+
+### app_users 
+
+Column | Type | Default | Nullable 
+--- | --- | --- | --- 
+id | integer | nextval('app_users_id_seq'::regclass) | NO 
+email | character varying | None | NO 
+password | character varying | None | YES 
+is_active | boolean | true | YES 
+is_admin | boolean | false | YES 
 
 
 ## Run tests with Docker Compose
