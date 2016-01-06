@@ -5,6 +5,9 @@ A command line tool that generates markdown documentation for Postgres tables in
 pip install pg-table-markdown
 ```
 
+_Note:_ Since `pg-table-markdown` is intended to connect to Postgres databases, it has a dependedncy on `psycopg2`. However, `psycopg2` includes compiled C modules, and therefore may require compiling from source if it's not already installed. Installing via `pip` will require `python-dev` and `libpq-dev`. `psycopg2` maintainers generally recommend [installing from binary](http://initd.org/psycopg/docs/install.html#install-from-package) instead.
+
+
 ## Usage
 ```
 Usage: pgtablemd [OPTIONS]
