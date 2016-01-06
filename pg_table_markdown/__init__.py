@@ -27,10 +27,10 @@ def cli(database_url, table_schema, output_file):
 
     cursor = db.cursor()
     cursor.execute(build_schema_query(table_schema=table_schema))
-    result = cursor.fetchone()
+    results = cursor.fetchall()
     cursor.close()
 
-    parsed = parse_schema_data(schema_data=result[0])
+    parsed = parse_schema_data(schema_data=results)
     with open(output_file, 'w') as f:
         for table_name in sorted(parsed.keys()):
             f.write(SECTION_HEADING.format(table_name))
