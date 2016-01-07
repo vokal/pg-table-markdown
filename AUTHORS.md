@@ -1,7 +1,7 @@
 **Author:**
-- Brian Hines, @projectweekend
+- Brian Hines, [projectweekend](https://github.com/projectweekend)
 
 
 **Contributors:**
-- Chris Foresman, @foresmac
-- François Pietka, @fpietka
+- Chris Foresman, [foresmac](https://github.com/foresmac)
+- François Pietka, [fpietka](https://github.com/fpietka)
