@@ -16,7 +16,7 @@ DATABASE_URL = 'postgres://{0}:{1}@{2}:{3}/{4}'.format(
     DATABASE_PORT,
     DATABASE_NAME)
 OUTPUT_FILE = '/test/tables.md'
-
+OUTPUT_FILE2 = '/test/tables_with_length.md'
 
 def database_connection():
     connection = psycopg2.connect(
@@ -50,7 +50,8 @@ class CliTestCase(unittest.TestCase):
         (
             id          SERIAL PRIMARY KEY,
             email       TEXT NOT NULL,
-            password    TEXT NOT NULL
+            password    TEXT NOT NULL,
+            display_name CHARACTER VARYING(256)
         );
         """
         cursor = db.cursor()
@@ -73,12 +74,38 @@ class CliTestCase(unittest.TestCase):
         self.assertEqual("id | integer | nextval('my_users_id_seq'::regclass) | NO \n", result[4])
         self.assertEqual('email | text | None | NO \n', result[5])
         self.assertEqual('password | text | None | NO \n', result[6])
-        self.assertEqual('\n', result[7])
+        self.assertEqual('display_name | character varying | None | YES \n',result[7])
+        self.assertEqual('\n', result[8])
 
-        self.assertEqual('### my_whatever \n', result[8])
-        self.assertEqual('\n', result[9])
-        self.assertEqual('Column | Type | Default | Nullable \n', result[10])
-        self.assertEqual('--- | --- | --- | --- \n', result[11])
-        self.assertEqual("id | integer | nextval('my_whatever_id_seq'::regclass) | NO \n", result[12])
-        self.assertEqual('stuff | text | None | NO \n', result[13])
-        self.assertEqual('\n', result[14])
+        self.assertEqual('### my_whatever \n', result[9])
+        self.assertEqual('\n', result[10])
+        self.assertEqual('Column | Type | Default | Nullable \n', result[11])
+        self.assertEqual('--- | --- | --- | --- \n', result[12])
+        self.assertEqual("id | integer | nextval('my_whatever_id_seq'::regclass) | NO \n", result[13])
+        self.assertEqual('stuff | text | None | NO \n', result[14])
+        self.assertEqual('\n', result[15])
+
+        output_file = '--output_file={0}'.format(OUTPUT_FILE2)
+        max_length = '--max_length'
+        proc = subprocess.Popen(['pgtablemd', database_url, table_schema, output_file, max_length])
+        proc.communicate()
+        with open(OUTPUT_FILE2, 'r') as f:
+            result = f.readlines()
+
+        self.assertEqual('### my_users \n', result[0])
+        self.assertEqual('\n', result[1])
+        self.assertEqual('Column | Type | Default | Nullable \n', result[2])
+        self.assertEqual('--- | --- | --- | --- \n', result[3])
+        self.assertEqual("id | integer | nextval('my_users_id_seq'::regclass) | NO \n", result[4])
+        self.assertEqual('email | text | None | NO \n', result[5])
+        self.assertEqual('password | text | None | NO \n', result[6])
+        self.assertEqual('display_name | character varying(256) | None | YES \n',result[7])
+        self.assertEqual('\n', result[8])
+
+        self.assertEqual('### my_whatever \n', result[9])
+        self.assertEqual('\n', result[10])
+        self.assertEqual('Column | Type | Default | Nullable \n', result[11])
+        self.assertEqual('--- | --- | --- | --- \n', result[12])
+        self.assertEqual("id | integer | nextval('my_whatever_id_seq'::regclass) | NO \n", result[13])
+        self.assertEqual('stuff | text | None | NO \n', result[14])
+        self.assertEqual('\n', result[15])

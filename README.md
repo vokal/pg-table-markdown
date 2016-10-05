@@ -18,6 +18,7 @@ Options:
   --database_url TEXT  Database connection URL
   --table_schema TEXT  Postgres table_schema, default is: public
   --output_file TEXT   Path for generated markdown file
+  --max_length         To display maximum length of character varying, default is: False
   --help               Show this message and exit.
 ```
 
